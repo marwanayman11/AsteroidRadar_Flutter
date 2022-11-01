@@ -42,6 +42,19 @@ class DetailScreen extends StatelessWidget {
               title: const Padding(
                 padding: EdgeInsets.only(bottom: 5.0),
                 child: Text(
+                  "Absolute magnitude",
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+              ),
+              subtitle: Text(
+                "${asteroid!.absoluteMagnitude} au",
+                style: const TextStyle(color: Colors.grey, fontSize: 15),
+              ),
+            ),
+            ListTile(
+              title: const Padding(
+                padding: EdgeInsets.only(bottom: 5.0),
+                child: Text(
                   "Estimated diameter",
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
