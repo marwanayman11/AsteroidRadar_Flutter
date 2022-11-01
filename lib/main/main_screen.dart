@@ -60,61 +60,51 @@ class MainScreen extends StatelessWidget {
                     physics: const BouncingScrollPhysics(),
                     child: Column(
                       children: [
-                        Stack(
-                          alignment: Alignment.bottomLeft,
-                          children: [
-                            cubit.pictureOfTheDay!.mediaType == "video"
-                                ? InkWell(
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  WebViewScreen(cubit
-                                                      .pictureOfTheDay!.url)));
-                                    },
-                                    child: CachedVideoPreviewWidget(
-                                      path: cubit.pictureOfTheDay!.url,
-                                      type: SourceType.remote,
-                                      remoteImageBuilder: (context, url) =>
-                                          CachedNetworkImage(
-                                        imageUrl: url,
-                                        placeholder: (context, url) => const Image(
-                                            image: AssetImage(
-                                                "assets/images/placeholder.jpg")),
-                                        errorWidget: (context, url, error) =>
-                                            const Icon(Icons.error),
-                                      ),
-                                    ),
-                                  )
-                                : InkWell(
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  WebViewScreen(cubit
-                                                      .pictureOfTheDay!.url)));
-                                    },
-                                    child: CachedNetworkImage(
-                                      imageUrl: cubit.pictureOfTheDay!.url,
+                        InkWell(
+                          onTap:(){
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        WebViewScreen(cubit
+                                            .pictureOfTheDay!.url)));
+                          },
+                          child: Stack(
+                            alignment: Alignment.bottomLeft,
+                            children: [
+                              cubit.pictureOfTheDay!.mediaType == "video"
+                                  ? CachedVideoPreviewWidget(
+                                    path: cubit.pictureOfTheDay!.url,
+                                    type: SourceType.remote,
+                                    remoteImageBuilder: (context, url) =>
+                                        CachedNetworkImage(
+                                      imageUrl: url,
                                       placeholder: (context, url) => const Image(
                                           image: AssetImage(
                                               "assets/images/placeholder.jpg")),
                                       errorWidget: (context, url, error) =>
                                           const Icon(Icons.error),
                                     ),
+                                  )
+                                  : CachedNetworkImage(
+                                    imageUrl: cubit.pictureOfTheDay!.url,
+                                    placeholder: (context, url) => const Image(
+                                        image: AssetImage(
+                                            "assets/images/placeholder.jpg")),
+                                    errorWidget: (context, url, error) =>
+                                        const Icon(Icons.error),
                                   ),
-                            Container(
-                              color: Colors.black,
-                              child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Text(cubit.pictureOfTheDay!.title,
-                                    style: const TextStyle(
-                                        color: Colors.white, fontSize: 20)),
-                              ),
-                            )
-                          ],
+                              Container(
+                                color: Colors.black,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Text(cubit.pictureOfTheDay!.title,
+                                      style: const TextStyle(
+                                          color: Colors.white, fontSize: 20)),
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                         state is GetAsteroidsLoadingState ||
                                 state is GetAsteroidsTodayLoadingState ||

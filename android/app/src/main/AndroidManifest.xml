@@ -4,8 +4,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher"
-        android:label="asteroid_radar"
+        android:icon="@mipmap/launcher_icon"
+        android:label="Radar"
         android:networkSecurityConfig="@xml/network_security_config"
         android:usesCleartextTraffic="true">
         <activity
