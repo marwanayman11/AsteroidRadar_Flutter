@@ -21,8 +21,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
         create: (BuildContext context) => MainCubit()
-          ..getPictureData()
-          ..getAsteroidsData(),
+          ..getAsteroidsData()
+          ..getPictureData(),
         child: BlocConsumer<MainCubit, MainStates>(
           builder: (context, state) {
             return const MaterialApp(

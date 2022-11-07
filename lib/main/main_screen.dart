@@ -4,7 +4,6 @@ import 'package:asteroid_radar/main/cubit/states.dart';
 import 'package:asteroid_radar/main/web_view.dart';
 import 'package:asteroid_radar/models/asteroid.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cached_video_preview/cached_video_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -61,39 +60,41 @@ class MainScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         InkWell(
-                          onTap:(){
+                          onTap: () {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        WebViewScreen(cubit
-                                            .pictureOfTheDay!.url)));
+                                    builder: (context) => WebViewScreen(
+                                        cubit.pictureOfTheDay!.url)));
                           },
                           child: Stack(
                             alignment: Alignment.bottomLeft,
                             children: [
-                              cubit.pictureOfTheDay!.mediaType == "video"
-                                  ? CachedVideoPreviewWidget(
-                                    path: cubit.pictureOfTheDay!.url,
-                                    type: SourceType.remote,
-                                    remoteImageBuilder: (context, url) =>
-                                        CachedNetworkImage(
-                                      imageUrl: url,
+                              cubit.pictureOfTheDay!.mediaType == "image"
+                                  ? CachedNetworkImage(
+                                      imageUrl: cubit.pictureOfTheDay!.url,
                                       placeholder: (context, url) => const Image(
                                           image: AssetImage(
                                               "assets/images/placeholder.jpg")),
                                       errorWidget: (context, url, error) =>
                                           const Icon(Icons.error),
-                                    ),
-                                  )
-                                  : CachedNetworkImage(
-                                    imageUrl: cubit.pictureOfTheDay!.url,
-                                    placeholder: (context, url) => const Image(
-                                        image: AssetImage(
-                                            "assets/images/placeholder.jpg")),
-                                    errorWidget: (context, url, error) =>
-                                        const Icon(Icons.error),
-                                  ),
+                                    )
+                                  : Container(
+                                      color: Colors.white,
+                                      width: double.infinity,
+                                      height: 250,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(Icons.video_library_rounded),
+                                          Text(
+                                              " There's a video, tap to watch it.",
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 20)),
+                                        ],
+                                      )),
                               Container(
                                 color: Colors.black,
                                 child: Padding(

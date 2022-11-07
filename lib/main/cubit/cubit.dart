@@ -4,6 +4,7 @@ import 'package:asteroid_radar/shared/network/remote/constants.dart';
 import 'package:asteroid_radar/shared/network/remote/dio_helper.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sqflite/sqflite.dart';
 
 import '../../models/asteroid.dart';
 
@@ -13,6 +14,7 @@ class MainCubit extends Cubit<MainStates> {
   static MainCubit get(context) => BlocProvider.of(context);
   Objects? objects;
   List<Asteroid> asteroids = [];
+  late Database database;
 
   void getAsteroidsData() {
     emit(GetAsteroidsLoadingState());
